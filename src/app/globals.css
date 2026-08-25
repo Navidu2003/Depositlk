@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-ink-teal: #1F4E5F;
+    --color-deep-teal: #2E7D6B;
+    --color-brass-gold: #C9A227;
+    --color-sage-green: #8FAE8B;
+    --color-light-mist: #EAF1EE;
+    --color-pale-teal: #DCEAE4;
+    --color-warm-cream: #FBF3E3;
+    --color-coral: #D85A30;
+    --color-neutral-light: #F4F3EE;
+    --color-neutral-border: #DADAD3;
+    --color-dark-gray: #4A4A47;
+  }
+}
