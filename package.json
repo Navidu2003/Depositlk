@@ -10,6 +10,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@prisma/client": "^7.9.1",
     "lucide-react": "^1.16.0",
     "next": "^15.1.0",
     "react": "^19.0.0",
@@ -25,6 +26,7 @@
     "eslint": "^9.0.0",
     "eslint-config-next": "^15.5.23",
     "postcss": "^8.5.0",
+    "prisma": "^7.9.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.7.0",
     "vitest": "^2.1.8"
