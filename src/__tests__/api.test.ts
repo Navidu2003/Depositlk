@@ -32,6 +32,23 @@ describe("Rate Suggestion API Handler", () => {
     expect(data.error).toContain("Invalid rate value");
   });
 
+  it("rejects zero interest rates as invalid values", async () => {
+    const req = new Request("http://localhost:3000/api/suggest-rate", {
+      method: "POST",
+      body: JSON.stringify({
+        bankSlug: "boc",
+        accountType: "FD",
+        proposedRate: 0,
+      }),
+    });
+
+    const response = await POST(req);
+    const data = await response.json();
+
+    expect(response.status).toBe(422);
+    expect(data.error).toContain("Invalid rate value");
+  });
+
   it("successfully accepts valid rate submissions", async () => {
     const req = new Request("http://localhost:3000/api/suggest-rate", {
       method: "POST",
