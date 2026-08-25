@@ -1,4 +1,4 @@
-# DepositLK (දැන් තැන්පතු / තැන්පතු සංසන්දනය)
+# DepositLK 
 
 DepositLK is an independent, non-commercial deposit comparison platform designed for Sri Lankan savers. It prioritizes account-type education (Fixed Deposit vs. Recurring Deposit vs. Savings) before presenting institutional data in strict alphabetical order.
 
