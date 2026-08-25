@@ -1,34 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DepositLK (දැන් තැන්පතු / තැන්පතු සංසන්දනය)
 
-## Getting Started
+DepositLK is an independent, non-commercial deposit comparison platform designed for Sri Lankan savers. It prioritizes account-type education (Fixed Deposit vs. Recurring Deposit vs. Savings) before presenting institutional data in strict alphabetical order.
 
-First, run the development server:
+![DepositLK CI](https://github.com/Navidu2003/Depositlk/actions/workflows/ci.yml/badge.svg)
+![License](https://img.shields.io/badge/License-MIT-teal.svg)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Radical Neutrality:** Strict A–Z alphabetical directory with zero sponsored placements or artificial rankings.
+- **Account Type Recommendation Engine:** 4-question client-side quiz evaluating liquidity, frequency, and time horizon.
+- **Interactive Calculator:** Compound interest and recurring deposit projections with dynamic tenure adjustments.
+- **3-Bank Comparison Matrix:** Side-by-side spec comparison with synchronized URL query states (`/compare?banks=boc,commercial-bank`).
+- **Client-Side Privacy:** Zero persistence of personal financial inputs; all calculation occurs in-browser.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Framework:** [Next.js 16 (App Router)](https://nextjs.org/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Testing:** [Vitest](https://vitest.dev/)
+- **CI/CD:** GitHub Actions & Vercel Edge Network
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Local Development
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/Navidu2003/Depositlk.git](https://github.com/Navidu2003/Depositlk.git)
+   cd depositlk
