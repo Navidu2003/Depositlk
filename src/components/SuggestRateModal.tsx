@@ -60,9 +60,9 @@ export default function SuggestRateModal({
         setSourceUrl("");
         setUserEmail("");
       }, 2000);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus("error");
-      setErrorMessage(err.message || "An unexpected error occurred.");
+      setErrorMessage(err instanceof Error ? err.message : "An unexpected error occurred.");
     } finally {
       setLoading(false);
     }
