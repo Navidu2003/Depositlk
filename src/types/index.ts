@@ -15,17 +15,20 @@ export interface BankRate {
   accountType: AccountType;
   tenure: string;
   interestRate: number;
-  minDeposit: number;
+  minDeposit?: number;
+  payoutFrequency?: string;
 }
 
 export interface Bank {
   id: string;
   name: string;
   slug: string;
-  initials: string;
+  tagline?: string;
+  initials?: string;
   accountTypes: AccountType[];
   websiteUrl: string;
   earlyWithdrawalPenalty: string;
-  documents: string[];
+  documents?: string[];
+  requiredDocuments?: string[];
   rates: BankRate[];
 }

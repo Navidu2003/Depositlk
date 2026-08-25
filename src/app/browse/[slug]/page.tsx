@@ -61,7 +61,7 @@ export default function BankDetailPage({ params }: PageProps) {
                 </span>
               </div>
               <p className="text-sm text-[#4A4A47] mt-1.5 max-w-2xl leading-relaxed">
-                {bank.name} offers independently listed deposit products with published terms for comparison.
+                {bank.tagline || `${bank.name} offers independently listed deposit products with published terms for comparison.`}
               </p>
             </div>
           </div>
@@ -188,7 +188,7 @@ export default function BankDetailPage({ params }: PageProps) {
                   </td>
                   <td className="p-4 text-[#4A4A47] font-medium">{rate.tenure}</td>
                   <td className="p-4 font-bold text-[#2E7D6B]">{rate.interestRate.toFixed(2)}%</td>
-                  <td className="p-4 text-[#4A4A47]">As per bank schedule</td>
+                  <td className="p-4 text-[#4A4A47]">{rate.payoutFrequency || "As per bank schedule"}</td>
                 </tr>
               ))}
             </tbody>
@@ -216,7 +216,7 @@ export default function BankDetailPage({ params }: PageProps) {
               Mandatory Documentation Checklist
             </div>
             <ul className="space-y-2 text-xs text-[#4A4A47]">
-              {bank.documents.map((doc, idx) => (
+              {(bank.requiredDocuments || bank.documents || []).map((doc, idx) => (
                 <li key={idx} className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#2E7D6B]" />
                   {doc}
