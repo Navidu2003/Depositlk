@@ -1,15 +1,26 @@
 import { NextResponse } from "next/server";
-import { rateSubmissions, addSubmission, updateSubmissionStatus } from "@/lib/rateStore";
+import { prisma } from "@/lib/prisma";
 
-// GET: Fetch all submissions for the Admin Panel
+// GET: Fetch all submissions for Admin Verification Queue
 export async function GET() {
-  return NextResponse.json({
-    success: true,
-    data: rateSubmissions,
-  });
+  try {
+    const submissions = await prisma.rateSubmission.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+
+    return NextResponse.json({
+      success: true,
+      data: submissions,
+    });
+  } catch {
+    return NextResponse.json(
+      { error: "Failed to retrieve rate submissions." },
+      { status: 500 }
+    );
+  }
 }
 
-// POST: Add a new rate suggestion from the public modal
+// POST: Save a new rate suggestion from the public modal
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -22,38 +33,42 @@ export async function POST(request: Request) {
       );
     }
 
-    if (typeof proposedRate !== "number" || proposedRate <= 0 || proposedRate > 50) {
+    const rateNum = Number(proposedRate);
+    if (isNaN(rateNum) || rateNum <= 0 || rateNum > 50) {
       return NextResponse.json(
         { error: "Invalid rate value. Must be a percentage between 0 and 50." },
         { status: 422 }
       );
     }
 
-    const newSubmission = addSubmission({
-      bankSlug,
-      accountType,
-      proposedRate,
-      sourceUrl: sourceUrl || undefined,
-      userEmail: userEmail || undefined,
+    const newSubmission = await prisma.rateSubmission.create({
+      data: {
+        bankSlug,
+        accountType,
+        proposedRate: rateNum,
+        sourceUrl: sourceUrl || null,
+        userEmail: userEmail || null,
+        status: "pending_review",
+      },
     });
 
     return NextResponse.json(
       {
         success: true,
-        message: "Rate suggestion received and queued for verification.",
+        message: "Rate suggestion received and saved to verification database.",
         data: newSubmission,
       },
       { status: 201 }
     );
   } catch {
     return NextResponse.json(
-      { error: "Failed to process request payload." },
+      { error: "Failed to persist rate suggestion." },
       { status: 500 }
     );
   }
 }
 
-// PATCH: Update review status (approve / reject)
+// PATCH: Approve or Reject a rate submission
 export async function PATCH(request: Request) {
   try {
     const body = await request.json();
@@ -66,16 +81,20 @@ export async function PATCH(request: Request) {
       );
     }
 
-    const updated = updateSubmissionStatus(id, status);
-    if (!updated) {
-      return NextResponse.json({ error: "Submission not found." }, { status: 404 });
-    }
+    const updated = await prisma.rateSubmission.update({
+      where: { id },
+      data: { status },
+    });
 
     return NextResponse.json({
       success: true,
       message: `Submission status updated to ${status}.`,
+      data: updated,
     });
   } catch {
-    return NextResponse.json({ error: "Internal server error." }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to update submission status or record not found." },
+      { status: 500 }
+    );
   }
 }
