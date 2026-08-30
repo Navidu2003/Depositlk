@@ -35,6 +35,31 @@ export interface TranslationDictionary {
     verified: string;
     perAnnum: string;
   };
+  // Newly added flat translations for the updated page.tsx
+  fdTitle: string;
+  fdDesc: string;
+  savingsTitle: string;
+  savingsDesc: string;
+  seniorTitle: string;
+  seniorDesc: string;
+  childrenTitle: string;
+  childrenDesc: string;
+  heroTitle: string;
+  heroSubtitle: string;
+  takeQuizBtn: string;
+  howItWorksTitle: string;
+  step1Title: string;
+  step1Desc: string;
+  step2Title: string;
+  step2Desc: string;
+  step3Title: string;
+  step3Desc: string;
+  exploreTypesTitle: string;
+  exploreTypesSubtitle: string;
+  viewRatesBtn: string;
+  whyNoRankTitle: string;
+  whyNoRankP1: string;
+  whyNoRankP2: string;
 }
 
 export const translations: Record<Language, TranslationDictionary> = {
@@ -74,6 +99,30 @@ export const translations: Record<Language, TranslationDictionary> = {
       verified: "CBSL Licensed",
       perAnnum: "% p.a.",
     },
+    fdTitle: "Fixed Deposit (FD)",
+    fdDesc: "Lock away a lump sum for a fixed tenure with guaranteed high returns.",
+    savingsTitle: "Savings Account",
+    savingsDesc: "Maintain full daily liquidity with continuous modest interest earnings.",
+    seniorTitle: "Senior Citizens",
+    seniorDesc: "Special higher interest rates for citizens over 60 years of age.",
+    childrenTitle: "Children's Savings",
+    childrenDesc: "Secure your child's future with bonus interest and rewards.",
+    heroTitle: "Find the right deposit account. Compare every bank fairly.",
+    heroSubtitle: "Understand Fixed Deposits, Recurring Deposits, and Savings accounts without sponsored rankings, predatory ads, or biased recommendations.",
+    takeQuizBtn: "Find My Account Type",
+    howItWorksTitle: "How DepositLK Works",
+    step1Title: "Take the 1-minute quiz",
+    step1Desc: "Answer 4 quick questions about your savings goals and time horizon.",
+    step2Title: "Discover account type",
+    step2Desc: "Learn whether a Fixed Deposit, Recurring Deposit, or Savings fits you best.",
+    step3Title: "Browse terms fairly",
+    step3Desc: "Compare rates across all Sri Lankan banks listed strictly in alphabetical order.",
+    exploreTypesTitle: "Explore Account Types",
+    exploreTypesSubtitle: "Understand the different ways to grow your money safely in Sri Lanka.",
+    viewRatesBtn: "View Rates",
+    whyNoRankTitle: "Why we don't rank banks",
+    whyNoRankP1: "We never take sponsorships or recommend one bank over another. Financial decisions depend on individual requirements, not arbitrary rankings.",
+    whyNoRankP2: "Our directory lists all licensed commercial banks in strict alphabetical order. You see exactly what they offer, nothing hidden.",
   },
   si: {
     nav: {
@@ -111,6 +160,30 @@ export const translations: Record<Language, TranslationDictionary> = {
       verified: "ශ්‍රී ලංකා මහ බැංකු ලියාපදිංචි",
       perAnnum: "වාර්ෂිකව %",
     },
+    fdTitle: "ස්ථාවර තැන්පතු (FD)",
+    fdDesc: "නියමිත කාලයක් සඳහා මුදල් තැන්පත් කර සහතික කළ ඉහළ ප්‍රතිලාභ ලබාගන්න.",
+    savingsTitle: "ඉතුරුම් ගිණුම්",
+    savingsDesc: "අවශ්‍ය ඕනෑම වේලාවක මුදල් ලබාගැනීමේ පහසුව සමඟ අඛණ්ඩ පොලී ආදායමක්.",
+    seniorTitle: "ජ්‍යෙෂ්ඨ පුරවැසි",
+    seniorDesc: "වයස අවුරුදු 60ට වැඩි පුරවැසියන් සඳහා විශේෂිත ඉහළ පොලී අනුපාත.",
+    childrenTitle: "ළමා ඉතුරුම්",
+    childrenDesc: "බෝනස් පොලී සහ ත්‍යාග සමඟින් ඔබේ දරුවාගේ අනාගතය සුරක්ෂිත කරන්න.",
+    heroTitle: "ඔබට ගැළපෙන තැන්පතු ගිණුම සොයා ගන්න. සියලුම බැංකු සාධාරණව සසඳන්න.",
+    heroSubtitle: "අනුග්‍රාහක ප්‍රචාරණයන්ගෙන් තොරව ස්ථාවර තැන්පතු, පුනරාවර්තී තැන්පතු සහ ඉතුරුම් ගිණුම් පිළිබඳ නිවැරදි තොරතුරු ලබා ගන්න.",
+    takeQuizBtn: "සුදුසු ගිණුම සොයන්න",
+    howItWorksTitle: "DepositLK ක්‍රියාත්මක වන ආකාරය",
+    step1Title: "විනාඩියක ප්‍රශ්නාවලිය",
+    step1Desc: "ඔබේ ඉතුරුම් අරමුණු සහ කාලසීමාව පිළිබඳ කෙටි ප්‍රශ්න 4කට පිළිතුරු දෙන්න.",
+    step2Title: "ගිණුම් වර්ගය හඳුනාගන්න",
+    step2Desc: "ස්ථාවර තැන්පතු, පුනරාවර්තී තැන්පතු හෝ ඉතුරුම් ගිණුම් අතුරින් ඔබට වඩාත් සුදුසු කුමක්දැයි දැනගන්න.",
+    step3Title: "සාධාරණව සසඳන්න",
+    step3Desc: "ශ්‍රී ලංකාවේ සියලුම බැංකු වල පොලී අනුපාත අකාරාදී පිළිවෙලින් සසඳන්න.",
+    exploreTypesTitle: "ගිණුම් වර්ග ගවේෂණය කරන්න",
+    exploreTypesSubtitle: "ශ්‍රී ලංකාව තුළ මුදල් සුරක්ෂිතව වර්ධනය කරගත හැකි විවිධ ක්‍රම අවබෝධ කරගන්න.",
+    viewRatesBtn: "පොලී අනුපාත බලන්න",
+    whyNoRankTitle: "අපි බැංකු ශ්‍රේණිගත නොකරන්නේ ඇයි",
+    whyNoRankP1: "අපි කිසිවිටෙකත් අනුග්‍රාහකත්වයන් ලබාගන්නේ නැත, එසේම එක් බැංකුවක් තවත් බැංකුවකට වඩා නිර්දේශ නොකරමු. මූල්‍ය තීරණ රඳා පවතින්නේ තනි පුද්ගල අවශ්‍යතා මත මිස අත්තනෝමතික ශ්‍රේණිගත කිරීම් මත නොවේ.",
+    whyNoRankP2: "අපගේ නාමාවලිය සියලුම බලපත්‍රලාභී වාණිජ බැංකු අකාරාදී පිළිවෙලින් දක්වයි. ඔබට සැඟවුණු කිසිවක් නොමැතිව ඔවුන් ලබාදෙන දේ හරියටම දැකගත හැකිය.",
   },
   ta: {
     nav: {
@@ -148,5 +221,29 @@ export const translations: Record<Language, TranslationDictionary> = {
       verified: "மத்திய வங்கி அனுமதி பெற்றது",
       perAnnum: "வருடாந்தம் %",
     },
+    fdTitle: "நிலையான வைப்பு (FD)",
+    fdDesc: "ஒரு குறிப்பிட்ட காலத்திற்கு பணத்தை வைப்பிட்டு உத்தரவாதமான அதிக வருமானத்தைப் பெறுங்கள்.",
+    savingsTitle: "சேமிப்புக் கணக்குகள்",
+    savingsDesc: "தேவையான நேரத்தில் பணத்தை எடுக்கும் வசதியுடன் தொடர்ச்சியான வட்டி வருமானம்.",
+    seniorTitle: "மூத்த குடிமக்கள்",
+    seniorDesc: "60 வயதிற்கு மேற்பட்ட குடிமக்களுக்கான விசேட அதிக வட்டி வீதங்கள்.",
+    childrenTitle: "சிறுவர் சேமிப்பு",
+    childrenDesc: "மேலதிக வட்டி மற்றும் பரிசுகளுடன் உங்கள் குழந்தையின் எதிர்காலத்தைப் பாதுகாக்கவும்.",
+    heroTitle: "உங்களுக்கு ஏற்ற வைப்புக் கணக்கைத் தெரிவு செய்யுங்கள். வங்கிகளை ஒப்பிடுங்கள்.",
+    heroSubtitle: "விளம்பர சார்பின்றி நிலையான வைப்பு, தொடர் வைப்பு மற்றும் சேமிப்புக் கணக்குகள் பற்றிய துல்லியமான தகவல்களைப் பெறுங்கள்.",
+    takeQuizBtn: "பொருத்தமான கணக்கைக் காண்க",
+    howItWorksTitle: "DepositLK எவ்வாறு செயல்படுகிறது",
+    step1Title: "ஒரு நிமிட வினாடிவினா",
+    step1Desc: "உங்கள் சேமிப்பு இலக்குகள் மற்றும் காலம் பற்றிய 4 சிறு வினாக்களுக்கு பதிலளிக்கவும்.",
+    step2Title: "கணக்கு வகையை அறியவும்",
+    step2Desc: "நிலையான வைப்பு, தொடர் வைப்பு அல்லது சேமிப்புக் கணக்குகளில் உங்களுக்கு ஏற்றதை தெரிந்து கொள்ளவும்.",
+    step3Title: "நடுநிலையாக ஒப்பிடவும்",
+    step3Desc: "இலங்கையிலுள்ள அனைத்து வங்கிகளின் வட்டி வீதங்களையும் அகர வரிசைப்படி ஒப்பிட்டுப் பாருங்கள்.",
+    exploreTypesTitle: "கணக்கு வகைகளை ஆராயுங்கள்",
+    exploreTypesSubtitle: "இலங்கையில் உங்கள் பணத்தை பாதுகாப்பாக வளர்ப்பதற்கான வெவ்வேறு வழிகளைப் புரிந்து கொள்ளுங்கள்.",
+    viewRatesBtn: "வட்டி வீதங்களைப் பார்க்க",
+    whyNoRankTitle: "நாங்கள் வங்கிகளை ஏன் தரவரிசைப்படுத்துவதில்லை",
+    whyNoRankP1: "நாங்கள் ஒருபோதும் அனுசரணை பெறுவதில்லை அல்லது ஒரு வங்கியை விட மற்றொன்றை பரிந்துரைப்பதில்லை. நிதி முடிவுகள் தனிநபர் தேவைகளைச் சார்ந்ததே தவிர, தன்னிச்சையான தரவரிசைகளை அல்ல.",
+    whyNoRankP2: "எங்கள் கோப்பகம் அனைத்து உரிமம் பெற்ற வணிக வங்கிகளையும் அகர வரிசைப்படி பட்டியலிடுகிறது. மறைமுகமான எதுவுமின்றி அவர்கள் வழங்குவதை நீங்கள் சரியாகப் பார்க்கலாம்.",
   },
 };
