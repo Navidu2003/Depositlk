@@ -1,152 +1,141 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { SAMPLE_BANKS } from "@/data/banks";
-import BankCard from "@/components/BankCard";
-import { useLanguage } from "@/context/LanguageContext";
-import { translations } from "@/lib/translations";
-import { CheckCircle2, ShieldCheck, ArrowRight } from "lucide-react";
+import React from 'react';
+import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations } from '@/lib/translations';
 
 export default function HomePage() {
   const { language } = useLanguage();
-  const t = translations[language];
-  const previewBanks = SAMPLE_BANKS.slice(0, 6); // First 6 alphabetical banks
+  const t = translations[language] || translations.en;
+
+  const accountTypes = [
+    {
+      title: t.fdTitle,
+      desc: t.fdDesc,
+      tag: 'Guaranteed Return',
+      href: '/browse?category=fixed-deposit',
+    },
+    {
+      title: t.savingsTitle,
+      desc: t.savingsDesc,
+      tag: 'Flexible Access',
+      href: '/browse?category=savings',
+    },
+    {
+      title: t.seniorTitle,
+      desc: t.seniorDesc,
+      tag: 'Bonus Rates',
+      href: '/browse?category=senior',
+    },
+    {
+      title: t.childrenTitle,
+      desc: t.childrenDesc,
+      tag: 'Long Term',
+      href: '/browse?category=children',
+    },
+  ];
 
   return (
-    <div className="flex flex-col gap-16 md:gap-24">
-      {/* 1. Hero Section */}
-      <section className="relative bg-[#EAF1EE] py-16 md:py-24 text-center px-5 overflow-hidden">
-        {/* Growth Staircase Subtle Watermark Motif */}
-        <div className="absolute inset-0 flex justify-center items-center opacity-10 pointer-events-none">
-          <div className="flex items-end gap-6 h-64">
-            <div className="w-16 h-20 bg-[#1F4E5F] rounded-lg"></div>
-            <div className="w-16 h-36 bg-[#1F4E5F] rounded-lg"></div>
-            <div className="w-16 h-52 bg-[#1F4E5F] rounded-lg"></div>
-            <div className="w-16 h-64 bg-[#1F4E5F] rounded-lg"></div>
-          </div>
-        </div>
+    <main className="min-h-screen bg-[#f4f7f6] text-slate-800">
+      {/* Hero Section */}
+      <section className="py-20 text-center px-4 max-w-4xl mx-auto">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-[#113a3a] leading-tight tracking-tight">
+          {t.heroTitle}
+        </h1>
+        <p className="mt-4 text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+          {t.heroSubtitle}
+        </p>
 
-        <div className="max-w-[800px] mx-auto relative z-10 flex flex-col items-center">
-          <h1 className="text-3xl md:text-5xl font-bold text-[#1F4E5F] tracking-tight mb-4">
-            {t.hero.title}
-          </h1>
-          <p className="text-base md:text-lg text-[#4A4A47] max-w-xl mb-8 leading-relaxed">
-            {t.hero.subtitle}
-          </p>
+        <div className="mt-8 flex justify-center">
           <Link
             href="/quiz"
-            className="px-8 py-3.5 bg-[#C9A227] text-[#1F4E5F] font-bold rounded-lg shadow-sm hover:opacity-95 transition-all text-base"
+            className="bg-[#c49b28] hover:bg-[#b08b22] text-white font-semibold px-8 py-3.5 rounded-lg shadow-md transition-transform transform active:scale-95"
           >
-            {t.hero.ctaQuiz}
+            {t.takeQuizBtn}
           </Link>
         </div>
       </section>
 
-      <div className="max-w-[1200px] mx-auto px-5 md:px-20 w-full flex flex-col gap-16 md:gap-24">
-        {/* 2. How It Works (3-Step Strip) */}
-        <section>
-          <h2 className="text-2xl font-bold text-[#1F4E5F] text-center mb-10">How DepositLK Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex flex-col items-center text-center p-6 bg-[#F4F3EE] rounded-lg border border-[#DADAD3]">
-              <span className="w-10 h-10 rounded-full bg-[#2E7D6B] text-white font-bold flex items-center justify-center mb-4">
-                1
-              </span>
-              <h3 className="font-semibold text-[#1F4E5F] text-lg mb-2">Take the 1-minute quiz</h3>
-              <p className="text-sm text-[#4A4A47]">Answer 4 quick questions about your savings goals and time horizon.</p>
-            </div>
-            <div className="flex flex-col items-center text-center p-6 bg-[#F4F3EE] rounded-lg border border-[#DADAD3]">
-              <span className="w-10 h-10 rounded-full bg-[#2E7D6B] text-white font-bold flex items-center justify-center mb-4">
-                2
-              </span>
-              <h3 className="font-semibold text-[#1F4E5F] text-lg mb-2">Discover account type</h3>
-              <p className="text-sm text-[#4A4A47]">Learn whether a Fixed Deposit, Recurring Deposit, or Savings fits you best.</p>
-            </div>
-            <div className="flex flex-col items-center text-center p-6 bg-[#F4F3EE] rounded-lg border border-[#DADAD3]">
-              <span className="w-10 h-10 rounded-full bg-[#2E7D6B] text-white font-bold flex items-center justify-center mb-4">
-                3
-              </span>
-              <h3 className="font-semibold text-[#1F4E5F] text-lg mb-2">Browse terms fairly</h3>
-              <p className="text-sm text-[#4A4A47]">Compare rates across all Sri Lankan banks listed strictly in alphabetical order.</p>
-            </div>
-          </div>
-        </section>
+      {/* How It Works Section */}
+      <section className="max-w-5xl mx-auto px-4 pb-20">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-[#113a3a] mb-12">
+          {t.howItWorksTitle}
+        </h2>
 
-        {/* 3. Account Type Teaser Cards */}
-        <section>
-          <h2 className="text-2xl font-bold text-[#1F4E5F] mb-6">Explore Account Types</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 bg-[#F4F3EE] border border-[#DADAD3] rounded-lg flex flex-col justify-between h-56">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white p-6 rounded-xl border border-gray-200 text-center shadow-sm">
+            <div className="w-10 h-10 bg-teal-800 text-white rounded-full flex items-center justify-center font-bold mx-auto mb-4">
+              1
+            </div>
+            <h3 className="font-bold text-gray-900 text-lg mb-2">{t.step1Title}</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">{t.step1Desc}</p>
+          </div>
+
+          <div className="bg-white p-6 rounded-xl border border-gray-200 text-center shadow-sm">
+            <div className="w-10 h-10 bg-teal-800 text-white rounded-full flex items-center justify-center font-bold mx-auto mb-4">
+              2
+            </div>
+            <h3 className="font-bold text-gray-900 text-lg mb-2">{t.step2Title}</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">{t.step2Desc}</p>
+          </div>
+
+          <div className="bg-white p-6 rounded-xl border border-gray-200 text-center shadow-sm">
+            <div className="w-10 h-10 bg-teal-800 text-white rounded-full flex items-center justify-center font-bold mx-auto mb-4">
+              3
+            </div>
+            <h3 className="font-bold text-gray-900 text-lg mb-2">{t.step3Title}</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">{t.step3Desc}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Explore Account Types Section */}
+      <section className="max-w-5xl mx-auto px-4 pb-20">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#113a3a]">
+            {t.exploreTypesTitle}
+          </h2>
+          <p className="text-gray-600 text-sm mt-2">
+            {t.exploreTypesSubtitle}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {accountTypes.map((type, idx) => (
+            <div key={idx} className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col justify-between">
               <div>
-                <h3 className="font-bold text-lg text-[#1F4E5F] mb-2">Fixed Deposit (FD)</h3>
-                <p className="text-sm text-[#4A4A47]">Lock away a lump sum for a fixed tenure with guaranteed high returns.</p>
+                <span className="inline-block bg-teal-50 text-teal-800 text-xs font-semibold px-2.5 py-1 rounded-full mb-3">
+                  {type.tag}
+                </span>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{type.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-4">{type.desc}</p>
               </div>
-              <Link href="/guides/fd" className="text-sm font-semibold text-[#2E7D6B] hover:underline flex items-center gap-1">
-                Learn more <ArrowRight className="w-4 h-4" />
+              <Link
+                href={type.href}
+                className="text-teal-800 font-semibold text-sm hover:text-teal-950 inline-flex items-center"
+              >
+                {t.viewRatesBtn} &rarr;
               </Link>
             </div>
-            <div className="p-6 bg-[#F4F3EE] border border-[#DADAD3] rounded-lg flex flex-col justify-between h-56">
-              <div>
-                <h3 className="font-bold text-lg text-[#1F4E5F] mb-2">Recurring Deposit (RD)</h3>
-                <p className="text-sm text-[#4A4A47]">Deposit a fixed amount every month to build disciplined long-term wealth.</p>
-              </div>
-              <Link href="/guides/rd" className="text-sm font-semibold text-[#2E7D6B] hover:underline flex items-center gap-1">
-                Learn more <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-            <div className="p-6 bg-[#F4F3EE] border border-[#DADAD3] rounded-lg flex flex-col justify-between h-56">
-              <div>
-                <h3 className="font-bold text-lg text-[#1F4E5F] mb-2">Savings Account</h3>
-                <p className="text-sm text-[#4A4A47]">Maintain full daily liquidity with continuous modest interest earnings.</p>
-              </div>
-              <Link href="/guides/savings" className="text-sm font-semibold text-[#2E7D6B] hover:underline flex items-center gap-1">
-                Learn more <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
+          ))}
+        </div>
+      </section>
 
-        {/* 4. Trust & Neutrality Section */}
-        <section className="bg-[#1F4E5F] text-white rounded-lg p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="max-w-md">
-            <h2 className="text-2xl font-bold mb-3 flex items-center gap-2">
-              <ShieldCheck className="text-[#C9A227] w-6 h-6" /> Why we don&apos;t rank banks
-            </h2>
-            <p className="text-sm text-gray-200 leading-relaxed">
-              We never take sponsorships or recommend one bank over another. Financial decisions depend on individual requirements, not arbitrary rankings.
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 text-sm font-medium">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="text-[#8FAE8B] w-5 h-5" /> Alphabetical ordering always
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="text-[#8FAE8B] w-5 h-5" /> No paid placements or sponsored cards
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="text-[#8FAE8B] w-5 h-5" /> Direct rate data from public filings
-            </div>
-          </div>
-        </section>
-
-        {/* 5. Bank Directory Preview (A-Z) */}
-        <section>
-          <div className="flex justify-between items-end mb-6">
-            <div>
-              <h2 className="text-2xl font-bold text-[#1F4E5F]">All banks (A–Z)</h2>
-              <p className="text-sm text-[#4A4A47]">Preview of licensed Sri Lankan deposit institutions</p>
-            </div>
-            <Link href="/browse" className="text-sm font-semibold text-[#2E7D6B] hover:underline flex items-center gap-1">
-              See all 9 banks <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {previewBanks.map((bank) => (
-              <BankCard key={bank.id} bank={bank} />
-            ))}
-          </div>
-        </section>
-      </div>
-    </div>
+      {/* Why We Don't Rank Banks Section */}
+      <section className="max-w-4xl mx-auto px-4 pb-24 text-center">
+        <div className="bg-[#e9f0ee] border border-teal-100 rounded-2xl p-8 sm:p-10">
+          <h2 className="text-2xl font-bold text-[#113a3a] mb-4">
+            {t.whyNoRankTitle}
+          </h2>
+          <p className="text-gray-700 text-sm sm:text-base leading-relaxed mb-4">
+            {t.whyNoRankP1}
+          </p>
+          <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
+            {t.whyNoRankP2}
+          </p>
+        </div>
+      </section>
+    </main>
   );
 }
