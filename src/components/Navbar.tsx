@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Search, Menu, X } from "lucide-react";
+import LanguageToggle from "@/components/LanguageToggle";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,19 +27,25 @@ export default function Navbar() {
           <Link href="/quiz" className="hover:text-brass-gold transition-colors">Quiz</Link>
           <Link href="/calculator" className="hover:text-brass-gold transition-colors">Calculator</Link>
           <Link href="/about" className="hover:text-brass-gold transition-colors">About</Link>
-          
+
+          <LanguageToggle />
+
           <Link href="/browse" aria-label="Search" className="p-1 hover:text-brass-gold transition-colors">
             <Search className="w-4 h-4" />
           </Link>
         </nav>
 
-        <button 
-          onClick={() => setIsOpen(!isOpen)} 
-          className="md:hidden p-2 text-white hover:text-brass-gold"
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageToggle />
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 text-white hover:text-brass-gold"
+            aria-label="Toggle Menu"
+            type="button"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       {isOpen && (
