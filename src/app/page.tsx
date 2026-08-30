@@ -1,9 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import { SAMPLE_BANKS } from "@/data/banks";
 import BankCard from "@/components/BankCard";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/lib/translations";
 import { CheckCircle2, ShieldCheck, ArrowRight } from "lucide-react";
 
 export default function HomePage() {
+  const { language } = useLanguage();
+  const t = translations[language];
   const previewBanks = SAMPLE_BANKS.slice(0, 6); // First 6 alphabetical banks
 
   return (
@@ -22,16 +28,16 @@ export default function HomePage() {
 
         <div className="max-w-[800px] mx-auto relative z-10 flex flex-col items-center">
           <h1 className="text-3xl md:text-5xl font-bold text-[#1F4E5F] tracking-tight mb-4">
-            Find the right deposit account. Compare every bank fairly.
+            {t.hero.title}
           </h1>
           <p className="text-base md:text-lg text-[#4A4A47] max-w-xl mb-8 leading-relaxed">
-            DepositLK guides you to an account type first — never to a single bank. Compare verified public rates transparently.
+            {t.hero.subtitle}
           </p>
           <Link
             href="/quiz"
             className="px-8 py-3.5 bg-[#C9A227] text-[#1F4E5F] font-bold rounded-lg shadow-sm hover:opacity-95 transition-all text-base"
           >
-            Take the quiz
+            {t.hero.ctaQuiz}
           </Link>
         </div>
       </section>

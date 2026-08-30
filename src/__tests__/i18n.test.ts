@@ -1,5 +1,10 @@
+import React from "react";
 import { describe, it, expect } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { translations, Language } from "../lib/translations";
+import { LanguageProvider } from "../context/LanguageContext";
+import LanguageToggle from "../components/LanguageToggle";
+import HomePage from "../app/page";
 
 describe("Trilingual Localization Dictionaries", () => {
   const languages: Language[] = ["en", "si", "ta"];
@@ -25,5 +30,22 @@ describe("Trilingual Localization Dictionaries", () => {
     expect(translations.ta.common.fd).toBe("நிலையான வைப்பு");
     expect(translations.ta.common.rd).toBe("தொடர் வைப்பு");
     expect(translations.ta.common.savings).toBe("சேமிப்புக் கணக்கு");
+  });
+
+  it("updates the visible home page copy when the language switcher changes language", () => {
+    render(
+      React.createElement(
+        LanguageProvider,
+        null,
+        React.createElement(LanguageToggle),
+        React.createElement(HomePage),
+      ),
+    );
+
+    expect(screen.getByText("Find the right deposit account. Compare every bank fairly.")).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "Sinhala" }));
+
+    expect(screen.getByText("ඔබට ගැළපෙන තැන්පතු ගිණුම සොයා ගන්න. සියලුම බැංකු සාධාරණව සසඳන්න.")).toBeTruthy();
   });
 });
