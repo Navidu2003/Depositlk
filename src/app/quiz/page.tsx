@@ -5,8 +5,13 @@ import Link from "next/link";
 import { QUIZ_QUESTIONS } from "@/data/quizQuestions";
 import { AccountType } from "@/types";
 import { ArrowLeft, ArrowRight, RotateCcw } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/lib/translations";
 
 export default function QuizPage() {
+  const { language } = useLanguage();
+  const t = translations[language].quiz;
+
   const [hasStarted, setHasStarted] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<AccountType[]>([]);
@@ -70,25 +75,25 @@ export default function QuizPage() {
             <span className="w-2 h-7 bg-[#C9A227] rounded-xs"></span>
             <span className="w-2 h-8 bg-[#C9A227] rounded-xs"></span>
           </div>
-          <h1 className="text-2xl font-bold text-[#1F4E5F] mb-3">Find your ideal account type</h1>
+          <h1 className="text-2xl font-bold text-[#1F4E5F] mb-3">{t.title}</h1>
           <p className="text-sm text-[#4A4A47] mb-6 leading-relaxed">
-            Answer 4 quick questions. We&apos;ll suggest an account type — we&apos;ll never tell you which bank to choose.
+            {t.subtitle}
           </p>
           <span className="inline-block text-xs font-semibold text-[#2E7D6B] mb-6 bg-[#DCEAE4] px-3 py-1 rounded-full">
-            ~1 minute
+            {t.duration}
           </span>
           <div className="flex flex-col gap-3">
             <button
               onClick={() => setHasStarted(true)}
               className="w-full py-3 bg-[#C9A227] text-[#1F4E5F] font-bold rounded-lg hover:opacity-95 transition-all text-sm"
             >
-              Start the quiz
+              {t.startBtn}
             </button>
             <Link
               href="/browse"
               className="w-full py-2.5 border border-[#DADAD3] text-[#4A4A47] font-semibold rounded-lg hover:bg-white transition-colors text-sm"
             >
-              Skip — Browse all banks
+              {t.skipBtn}
             </Link>
           </div>
         </div>
@@ -105,29 +110,29 @@ export default function QuizPage() {
           <div className="w-2.5 h-8 bg-[#C9A227] rounded-xs"></div>
           <div className="w-2.5 h-10 bg-[#C9A227] rounded-xs"></div>
         </div>
-        <p className="text-sm font-semibold text-[#1F4E5F]">Calculating your result…</p>
+        <p className="text-sm font-semibold text-[#1F4E5F]">{t.calculating}</p>
       </div>
     );
   }
 
   if (result) {
     const titles: Record<AccountType, string> = {
-      FD: "Fixed Deposit (FD)",
-      RD: "Recurring Deposit (RD)",
-      Savings: "Savings Account",
+      FD: t.fdTitle,
+      RD: t.rdTitle,
+      Savings: t.savingsTitle,
     };
 
     const reasons: Record<AccountType, string> = {
-      FD: "Because you have a lump sum and want predictable returns by locking funds securely.",
-      RD: "Because you save monthly and want steady, disciplined growth.",
-      Savings: "Because you require easy, penalty-free access to your money at any time.",
+      FD: t.fdReason,
+      RD: t.rdReason,
+      Savings: t.savingsReason,
     };
 
     return (
       <div className="max-w-[1200px] mx-auto px-5 py-16 flex justify-center">
         <div className="max-w-[480px] w-full bg-[#EAF1EE] border-2 border-[#2E7D6B] rounded-lg p-8 text-center shadow-sm">
           <span className="text-xs font-bold uppercase tracking-wider text-[#2E7D6B] mb-2 block">
-            Recommended Account Type
+            {t.recommended}
           </span>
           <h1 className="text-3xl font-bold text-[#1F4E5F] mb-4">{titles[result]}</h1>
           <p className="text-sm text-[#4A4A47] mb-8 leading-relaxed">{reasons[result]}</p>
@@ -137,18 +142,18 @@ export default function QuizPage() {
               href={`/browse?type=${result}`}
               className="w-full py-3 bg-[#C9A227] text-[#1F4E5F] font-bold rounded-lg hover:opacity-95 transition-all text-sm block"
             >
-              Browse matching banks
+              {t.browseBtn}
             </Link>
             <button
               onClick={restartQuiz}
               className="w-full py-2.5 border border-[#DADAD3] text-[#4A4A47] font-semibold rounded-lg hover:bg-white transition-colors text-sm flex items-center justify-center gap-2"
             >
-              <RotateCcw className="w-4 h-4" /> Retake the quiz
+              <RotateCcw className="w-4 h-4" /> {t.retakeBtn}
             </button>
           </div>
 
           <p className="text-xs text-gray-500">
-            DepositLK neutrality policy: No bank name will ever appear here.
+            {t.neutrality}
           </p>
         </div>
       </div>
@@ -161,7 +166,7 @@ export default function QuizPage() {
     <div className="max-w-[600px] mx-auto px-5 py-12">
       <div className="mb-6">
         <div className="flex justify-between items-center text-xs font-bold text-[#1F4E5F] mb-2">
-          <span>Step {currentStep + 1} of {totalSteps}</span>
+          <span>{t.step(currentStep + 1, totalSteps)}</span>
           <span>{Math.round(progressPercent)}%</span>
         </div>
         <div className="w-full h-2 bg-[#DADAD3] rounded-full overflow-hidden">
@@ -214,7 +219,7 @@ export default function QuizPage() {
               : "text-[#4A4A47] hover:bg-gray-100"
           }`}
         >
-          <ArrowLeft className="w-4 h-4" /> Back
+          <ArrowLeft className="w-4 h-4" /> {t.back}
         </button>
 
         <button
@@ -226,7 +231,7 @@ export default function QuizPage() {
               : "bg-[#2E7D6B] text-white hover:opacity-95"
           }`}
         >
-          {currentStep === totalSteps - 1 ? "See my recommendation" : "Next"}
+          {currentStep === totalSteps - 1 ? t.seeRecommendation : t.next}
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>

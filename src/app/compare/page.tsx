@@ -6,10 +6,16 @@ import Link from "next/link";
 import { SAMPLE_BANKS } from "@/data/banks";
 import { Bank } from "@/types";
 import { Check, Copy, ChevronRight, X, ExternalLink } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/lib/translations";
 
 function CompareContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { language } = useLanguage();
+  const t = translations[language].compare;
+  const tNav = translations[language].nav;
+  
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>([]);
   const [copied, setCopied] = useState(false);
 
@@ -80,19 +86,19 @@ function CompareContent() {
     <div className="max-w-[1200px] mx-auto px-5 md:px-20 py-10">
       {/* Breadcrumb Nav */}
       <nav className="flex items-center gap-2 text-sm text-[#4A4A47] mb-6">
-        <Link href="/" className="hover:text-[#1F4E5F]">Home</Link>
+        <Link href="/" className="hover:text-[#1F4E5F]">{tNav.home}</Link>
         <ChevronRight className="w-4 h-4 text-[#DADAD3]" />
-        <Link href="/browse" className="hover:text-[#1F4E5F]">Directory</Link>
+        <Link href="/browse" className="hover:text-[#1F4E5F]">{t.breadcrumbDir}</Link>
         <ChevronRight className="w-4 h-4 text-[#DADAD3]" />
-        <span className="text-[#1F4E5F] font-semibold">Side-by-Side Comparison</span>
+        <span className="text-[#1F4E5F] font-semibold">{t.breadcrumbCompare}</span>
       </nav>
 
       {/* Header & Copy Action */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-[#1F4E5F] tracking-tight">Compare Bank Terms</h1>
+          <h1 className="text-3xl font-bold text-[#1F4E5F] tracking-tight">{t.title}</h1>
           <p className="text-sm text-[#4A4A47] mt-1">
-            Compare up to 3 licensed institutions side-by-side with verified rates and penalty rules.
+            {t.subtitle}
           </p>
         </div>
         <button
@@ -101,11 +107,11 @@ function CompareContent() {
         >
           {copied ? (
             <>
-              <Check className="w-4 h-4 text-[#2E7D6B]" /> Link Copied!
+              <Check className="w-4 h-4 text-[#2E7D6B]" /> {t.copiedBtn}
             </>
           ) : (
             <>
-              <Copy className="w-4 h-4 text-[#2E7D6B]" /> Share Comparison
+              <Copy className="w-4 h-4 text-[#2E7D6B]" /> {t.shareBtn}
             </>
           )}
         </button>
@@ -125,7 +131,7 @@ function CompareContent() {
               </button>
             )}
             <label className="text-xs font-semibold text-[#4A4A47] uppercase tracking-wider block mb-2">
-              Bank Slot {idx + 1}
+              {t.bankSlot(idx + 1)}
             </label>
             <select
               value={bank?.slug || ""}
@@ -146,7 +152,7 @@ function CompareContent() {
             onClick={handleAddSlot}
             className="h-full min-h-[96px] border-2 border-dashed border-[#DADAD3] rounded-lg flex flex-col items-center justify-center text-sm font-semibold text-[#2E7D6B] hover:bg-[#EAF1EE]/50 transition-colors"
           >
-            + Add Bank to Compare
+            {t.addBankBtn}
           </button>
         )}
       </div>
@@ -156,7 +162,7 @@ function CompareContent() {
         <table className="w-full text-left text-sm border-collapse min-w-[650px]">
           <thead>
             <tr className="bg-[#EAF1EE] border-b border-[#DADAD3]">
-              <th className="p-4 font-bold text-[#1F4E5F] w-1/4">Specification</th>
+              <th className="p-4 font-bold text-[#1F4E5F] w-1/4">{t.specHeader}</th>
               {comparedBanks.map((bank, idx) => (
                 <th key={idx} className="p-4 font-bold text-[#1F4E5F]">
                   {bank?.name}
@@ -166,7 +172,7 @@ function CompareContent() {
           </thead>
           <tbody className="divide-y divide-[#DADAD3]">
             <tr>
-              <td className="p-4 font-semibold text-[#1F4E5F] bg-[#FAF9F5]">Available Accounts</td>
+              <td className="p-4 font-semibold text-[#1F4E5F] bg-[#FAF9F5]">{t.availAccHeader}</td>
               {comparedBanks.map((bank, idx) => (
                 <td key={idx} className="p-4">
                   <div className="flex flex-wrap gap-1.5">
@@ -180,7 +186,7 @@ function CompareContent() {
               ))}
             </tr>
             <tr>
-              <td className="p-4 font-semibold text-[#1F4E5F] bg-[#FAF9F5]">1-Year FD Rate</td>
+              <td className="p-4 font-semibold text-[#1F4E5F] bg-[#FAF9F5]">{t.fdRateHeader}</td>
               {comparedBanks.map((bank, idx) => {
                 const fdRate = bank?.rates.find((r) => r.accountType === "FD" && r.tenure.includes("1 Year"));
                 return (
@@ -191,7 +197,7 @@ function CompareContent() {
               })}
             </tr>
             <tr>
-              <td className="p-4 font-semibold text-[#1F4E5F] bg-[#FAF9F5]">Base Savings Rate</td>
+              <td className="p-4 font-semibold text-[#1F4E5F] bg-[#FAF9F5]">{t.savingsRateHeader}</td>
               {comparedBanks.map((bank, idx) => {
                 const savRate = bank?.rates.find((r) => r.accountType === "Savings");
                 return (
@@ -202,7 +208,7 @@ function CompareContent() {
               })}
             </tr>
             <tr>
-              <td className="p-4 font-semibold text-[#1F4E5F] bg-[#FAF9F5]">Early Withdrawal Penalty</td>
+              <td className="p-4 font-semibold text-[#1F4E5F] bg-[#FAF9F5]">{t.penaltyHeader}</td>
               {comparedBanks.map((bank, idx) => (
                 <td key={idx} className="p-4 text-xs text-[#4A4A47] leading-relaxed">
                   {bank?.earlyWithdrawalPenalty}
@@ -210,7 +216,7 @@ function CompareContent() {
               ))}
             </tr>
             <tr>
-              <td className="p-4 font-semibold text-[#1F4E5F] bg-[#FAF9F5]">Official Website</td>
+              <td className="p-4 font-semibold text-[#1F4E5F] bg-[#FAF9F5]">{t.websiteHeader}</td>
               {comparedBanks.map((bank, idx) => (
                 <td key={idx} className="p-4">
                   {bank ? (
@@ -220,7 +226,7 @@ function CompareContent() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 text-xs font-semibold text-[#2E7D6B] hover:underline"
                     >
-                      Visit portal <ExternalLink className="w-3.5 h-3.5" />
+                      {t.visitPortal} <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   ) : null}
                 </td>
@@ -234,6 +240,7 @@ function CompareContent() {
 }
 
 export default function ComparePage() {
+  // Let's create a wrapper to use the hook correctly since Suspense needs to be higher up
   return (
     <Suspense fallback={<div className="max-w-[1200px] mx-auto p-10 text-center text-[#4A4A47]">Loading comparison...</div>}>
       <CompareContent />

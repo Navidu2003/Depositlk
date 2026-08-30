@@ -5,8 +5,13 @@ import { SAMPLE_BANKS } from "@/data/banks";
 import BankCard from "@/components/BankCard";
 import { Search, X, SlidersHorizontal } from "lucide-react";
 import { AccountType } from "@/types";
+import { useLanguage } from "@/context/LanguageContext";
+import { translations } from "@/lib/translations";
 
 export default function BrowsePage() {
+  const { language } = useLanguage();
+  const t = translations[language].browse;
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState<string>("ALL");
 
@@ -27,8 +32,8 @@ export default function BrowsePage() {
     <div className="max-w-[1200px] mx-auto px-5 md:px-20 py-10">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-[#1F4E5F] tracking-tight mb-1">All banks (A–Z)</h1>
-        <p className="text-sm text-[#4A4A47]">Showing {filteredBanks.length} licensed deposit institutions</p>
+        <h1 className="text-3xl font-bold text-[#1F4E5F] tracking-tight mb-1">{t.title}</h1>
+        <p className="text-sm text-[#4A4A47]">{t.subtitle(filteredBanks.length)}</p>
       </div>
 
       {/* Search & Filter Controls */}
@@ -37,7 +42,7 @@ export default function BrowsePage() {
           <Search className="w-5 h-5 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
-            placeholder="Search banks or account types..."
+            placeholder={t.searchPlaceholder}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 bg-[#F4F3EE] border border-[#DADAD3] rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-[#2E7D6B]"
@@ -51,10 +56,10 @@ export default function BrowsePage() {
             onChange={(e) => setSelectedType(e.target.value)}
             className="w-full pl-9 pr-8 py-2.5 bg-[#F4F3EE] border border-[#DADAD3] rounded-lg text-sm text-[#1F4E5F] font-medium focus:outline-none focus:ring-2 focus:ring-[#2E7D6B] appearance-none cursor-pointer"
           >
-            <option value="ALL">All Account Types</option>
-            <option value="FD">Fixed Deposit (FD)</option>
-            <option value="RD">Recurring Deposit (RD)</option>
-            <option value="Savings">Savings Account</option>
+            <option value="ALL">{t.allTypes}</option>
+            <option value="FD">{t.fdType}</option>
+            <option value="RD">{t.rdType}</option>
+            <option value="Savings">{t.savingsType}</option>
           </select>
         </div>
       </div>
@@ -62,10 +67,10 @@ export default function BrowsePage() {
       {/* Active Filter Chips */}
       {(selectedType !== "ALL" || searchQuery) && (
         <div className="flex items-center gap-2 mb-8 flex-wrap">
-          <span className="text-xs text-[#4A4A47] font-medium">Active filters:</span>
+          <span className="text-xs text-[#4A4A47] font-medium">{t.activeFilters}</span>
           {selectedType !== "ALL" && (
             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#DCEAE4] text-[#2E7D6B] text-xs font-semibold rounded-full">
-              Type: {selectedType}
+              {t.typePrefix} {selectedType}
               <button onClick={() => setSelectedType("ALL")} className="hover:text-[#1F4E5F]">
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -73,14 +78,14 @@ export default function BrowsePage() {
           )}
           {searchQuery && (
             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#DCEAE4] text-[#2E7D6B] text-xs font-semibold rounded-full">
-              Query: &quot;{searchQuery}&quot;
+              {t.queryPrefix} &quot;{searchQuery}&quot;
               <button onClick={() => setSearchQuery("")} className="hover:text-[#1F4E5F]">
                 <X className="w-3.5 h-3.5" />
               </button>
             </span>
           )}
           <button onClick={clearFilters} className="text-xs text-[#2E7D6B] font-semibold hover:underline ml-2">
-            Clear all
+            {t.clearAll}
           </button>
         </div>
       )}
@@ -94,13 +99,13 @@ export default function BrowsePage() {
         </div>
       ) : (
         <div className="text-center py-16 bg-[#F4F3EE] border border-[#DADAD3] rounded-lg p-8">
-          <h2 className="text-xl font-bold text-[#1F4E5F] mb-2">No banks match your filters</h2>
-          <p className="text-sm text-[#4A4A47] mb-6">Try searching a different bank name or reset the account type filter.</p>
+          <h2 className="text-xl font-bold text-[#1F4E5F] mb-2">{t.noBanksTitle}</h2>
+          <p className="text-sm text-[#4A4A47] mb-6">{t.noBanksDesc}</p>
           <button
             onClick={clearFilters}
             className="px-5 py-2.5 border border-[#DADAD3] rounded-lg text-sm font-semibold text-[#4A4A47] hover:bg-[#eae8e1]"
           >
-            Clear all filters
+            {t.clearFiltersBtn}
           </button>
         </div>
       )}
