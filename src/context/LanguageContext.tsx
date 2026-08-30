@@ -15,15 +15,23 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
 
   useEffect(() => {
-    const saved = localStorage.getItem("depositlk_lang") as Language;
-    if (saved && (saved === "en" || saved === "si" || saved === "ta")) {
-      setLanguageState(saved);
+    try {
+      const saved = localStorage.getItem("depositlk_lang") as Language;
+      if (saved && (saved === "en" || saved === "si" || saved === "ta")) {
+        setLanguageState(saved);
+      }
+    } catch (e) {
+      console.warn("localStorage is not available for reading");
     }
   }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem("depositlk_lang", lang);
+    try {
+      localStorage.setItem("depositlk_lang", lang);
+    } catch (e) {
+      console.warn("localStorage is not available for writing");
+    }
   };
 
   const t = translations[language];
