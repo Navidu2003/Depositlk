@@ -1,62 +1,71 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Link from "next/link";
-import { Search, Menu, X } from "lucide-react";
-import LanguageToggle from "@/components/LanguageToggle";
+import React from 'react';
+import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
+import { translations, Language } from '@/lib/translations';
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
+  const t = translations[language] || translations.en;
+
+  const languages: { code: Language; label: string }[] = [
+    { code: 'en', label: 'EN' },
+    { code: 'si', label: 'සිං' },
+    { code: 'ta', label: 'தம' },
+  ];
 
   return (
-    <header className="sticky top-0 z-50 bg-ink-teal text-white h-16 shadow-sm">
-      <div className="max-w-[1200px] mx-auto px-5 md:px-20 h-full flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="flex items-end gap-[2px] h-6">
-            <span className="w-1.5 h-2 bg-brass-gold rounded-xs"></span>
-            <span className="w-1.5 h-3.5 bg-brass-gold rounded-xs"></span>
-            <span className="w-1.5 h-5 bg-brass-gold rounded-xs"></span>
-            <span className="w-1.5 h-6 bg-brass-gold rounded-xs"></span>
+    <header className="w-full bg-white border-b border-gray-200 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <Link href="/" className="flex items-center space-x-2">
+          <div className="w-8 h-8 rounded bg-amber-500 flex items-center justify-center text-white font-bold text-lg">
+            D
           </div>
-          <span className="font-bold text-xl tracking-tight text-white">DepositLK</span>
+          <span className="font-bold text-xl text-teal-950">DepositLK</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <Link href="/" className="hover:text-brass-gold transition-colors">Home</Link>
-          <Link href="/browse" className="hover:text-brass-gold transition-colors">Browse banks</Link>
-          <Link href="/quiz" className="hover:text-brass-gold transition-colors">Quiz</Link>
-          <Link href="/calculator" className="hover:text-brass-gold transition-colors">Calculator</Link>
-          <Link href="/about" className="hover:text-brass-gold transition-colors">About</Link>
-
-          <LanguageToggle />
-
-          <Link href="/browse" aria-label="Search" className="p-1 hover:text-brass-gold transition-colors">
-            <Search className="w-4 h-4" />
+        <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-600">
+          <Link href="/browse" className="hover:text-teal-900 transition-colors">
+            {t.nav.directory}
+          </Link>
+          <Link href="/compare" className="hover:text-teal-900 transition-colors">
+            {t.nav.compare}
+          </Link>
+          <Link href="/calculator" className="hover:text-teal-900 transition-colors">
+            {t.nav.calculator}
+          </Link>
+          <Link href="/quiz" className="hover:text-teal-900 transition-colors">
+            {t.nav.quiz}
           </Link>
         </nav>
 
-        <div className="flex items-center gap-2 md:hidden">
-          <LanguageToggle />
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="p-2 text-white hover:text-brass-gold"
-            aria-label="Toggle Menu"
-            type="button"
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center bg-gray-100 p-1 rounded-lg border border-gray-200">
+            {languages.map((item) => (
+              <button
+                key={item.code}
+                type="button"
+                onClick={() => setLanguage(item.code)}
+                className={`px-2.5 py-1 text-xs font-semibold rounded transition-all ${
+                  language === item.code
+                    ? 'bg-teal-900 text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+
+          <Link
+            href="/quiz"
+            className="bg-teal-950 text-white text-xs font-semibold px-4 py-2 rounded-md hover:bg-teal-900 transition shadow-sm"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            {t.quiz.startBtn}
+          </Link>
         </div>
       </div>
-
-      {isOpen && (
-        <div className="md:hidden bg-ink-teal border-t border-teal-800 px-6 py-4 flex flex-col gap-4 text-sm font-medium">
-          <Link href="/" onClick={() => setIsOpen(false)} className="py-2 hover:text-brass-gold">Home</Link>
-          <Link href="/browse" onClick={() => setIsOpen(false)} className="py-2 hover:text-brass-gold">Browse banks</Link>
-          <Link href="/quiz" onClick={() => setIsOpen(false)} className="py-2 hover:text-brass-gold">Quiz</Link>
-          <Link href="/calculator" onClick={() => setIsOpen(false)} className="py-2 hover:text-brass-gold">Calculator</Link>
-          <Link href="/about" onClick={() => setIsOpen(false)} className="py-2 hover:text-brass-gold">About</Link>
-        </div>
-      )}
     </header>
   );
 }

@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { getPrisma } from "@/lib/prisma";
 
 // GET: Fetch all submissions for Admin Verification Queue
 export async function GET() {
   try {
-    const submissions = await prisma.rateSubmission.findMany({
+    const submissions = await getPrisma().rateSubmission.findMany({
       orderBy: { createdAt: "desc" },
     });
 
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const newSubmission = await prisma.rateSubmission.create({
+    const newSubmission = await getPrisma().rateSubmission.create({
       data: {
         bankSlug,
         accountType,
@@ -81,7 +81,7 @@ export async function PATCH(request: Request) {
       );
     }
 
-    const updated = await prisma.rateSubmission.update({
+    const updated = await getPrisma().rateSubmission.update({
       where: { id },
       data: { status },
     });

@@ -1,3 +1,4 @@
+import { QuizQuestion } from "./../types";
 export type Language = "en" | "si" | "ta";
 
 export interface TranslationDictionary {
@@ -70,6 +71,7 @@ export interface TranslationDictionary {
     back: string;
     next: string;
     seeRecommendation: string;
+    questions: QuizQuestion[];
   };
   browse: {
     title: string;
@@ -210,6 +212,48 @@ export const translations: Record<Language, TranslationDictionary> = {
       back: "Back",
       next: "Next",
       seeRecommendation: "See my recommendation",
+      questions: [
+        {
+          id: 1,
+          question: "How soon might you need to access this money?",
+          options: [
+            { label: "Anytime — I want easy access", targetType: "Savings" },
+            { label: "Not for about a year", targetType: "FD" },
+            { label: "I can lock it away for 1–5 years", targetType: "FD" },
+            { label: "I plan to save a fixed amount every month", targetType: "RD" },
+          ],
+        },
+        {
+          id: 2,
+          question: "How are you planning to deposit your funds?",
+          options: [
+            { label: "One lump sum right now", targetType: "FD" },
+            { label: "Small regular monthly amounts", targetType: "RD" },
+            { label: "Flexible deposits whenever I have extra cash", targetType: "Savings" },
+            { label: "Emergency backup funds only", targetType: "Savings" },
+          ],
+        },
+        {
+          id: 3,
+          question: "What is your main savings goal?",
+          options: [
+            { label: "Guaranteed maximum returns on locked capital", targetType: "FD" },
+            { label: "Building a disciplined monthly savings habit", targetType: "RD" },
+            { label: "Everyday transactions and bill payments", targetType: "Savings" },
+            { label: "Short-term buffer for sudden expenses", targetType: "Savings" },
+          ],
+        },
+        {
+          id: 4,
+          question: "Can you commit to not withdrawing during the tenure?",
+          options: [
+            { label: "Yes, I won't touch it until maturity", targetType: "FD" },
+            { label: "Yes, as long as I can contribute monthly", targetType: "RD" },
+            { label: "No, I need the freedom to withdraw anytime", targetType: "Savings" },
+            { label: "Unsure, I prefer zero withdrawal penalties", targetType: "Savings" },
+          ],
+        },
+      ],
     },
     browse: {
       title: "All banks (A–Z)",
@@ -347,6 +391,48 @@ export const translations: Record<Language, TranslationDictionary> = {
       back: "ආපසු",
       next: "ඊළඟට",
       seeRecommendation: "මගේ නිර්දේශය බලන්න",
+      questions: [
+        {
+          id: 1,
+          question: "ඔබට මෙම මුදල් කොතරම් ඉක්මනින් අවශ්‍ය වේද?",
+          options: [
+            { label: "ඕනෑම වේලාවක — පහසුවෙන් මුදල් ලබාගැනීමට අවශ්‍යයි", targetType: "Savings" },
+            { label: "අවම වශයෙන් වසරක් යනතුරු අවශ්‍ය නොවේ", targetType: "FD" },
+            { label: "වසර 1-5 දක්වා කාලයක් සඳහා ආයෝජනය කළ හැක", targetType: "FD" },
+            { label: "සෑම මසකම නිශ්චිත මුදලක් ඉතිරි කිරීමට අපේක්ෂා කරමි", targetType: "RD" },
+          ],
+        },
+        {
+          id: 2,
+          question: "ඔබ ඔබේ මුදල් තැන්පත් කිරීමට සැලසුම් කරන්නේ කෙසේද?",
+          options: [
+            { label: "එකවර විශාල මුදලක් (Lump sum)", targetType: "FD" },
+            { label: "මාසිකව කුඩා මුදලක් ලෙස", targetType: "RD" },
+            { label: "අමතර මුදලක් ලැබෙන ඕනෑම විටෙක", targetType: "Savings" },
+            { label: "හදිසි අවශ්‍යතා සඳහා පමණි", targetType: "Savings" },
+          ],
+        },
+        {
+          id: 3,
+          question: "ඔබේ ප්‍රධාන ඉතුරුම් අරමුණ කුමක්ද?",
+          options: [
+            { label: "තැන්පත් කළ ප්‍රාග්ධනයට උපරිම සහතික කළ ප්‍රතිලාභ ලබාගැනීම", targetType: "FD" },
+            { label: "ක්‍රමානුකූල මාසික ඉතුරුම් පුරුද්දක් ගොඩනැගීම", targetType: "RD" },
+            { label: "දෛනික ගනුදෙනු සහ බිල්පත් ගෙවීම්", targetType: "Savings" },
+            { label: "හදිසි වියදම් සඳහා කෙටිකාලීන ආරක්ෂිත මුදලක්", targetType: "Savings" },
+          ],
+        },
+        {
+          id: 4,
+          question: "කාලසීමාව අවසන් වීමට පෙර මුදල් ලබා නොගන්නා බවට පොරොන්දු විය හැකිද?",
+          options: [
+            { label: "ඔව්, කල් පිරෙන තුරු මම මුදල් ලබා නොගනිමි", targetType: "FD" },
+            { label: "ඔව්, මට මාසිකව මුදල් තැන්පත් කළ හැකි තාක් කල්", targetType: "RD" },
+            { label: "නැත, මට අවශ්‍ය ඕනෑම වේලාවක මුදල් ලබාගැනීමේ නිදහස අවශ්‍යයි", targetType: "Savings" },
+            { label: "අවිනිශ්චිතයි, මම දඩ මුදල් ගෙවීමට අකමැතියි", targetType: "Savings" },
+          ],
+        },
+      ],
     },
     browse: {
       title: "සියලු බැංකු (A–Z)",
@@ -484,6 +570,48 @@ export const translations: Record<Language, TranslationDictionary> = {
       back: "பின்செல்",
       next: "அடுத்து",
       seeRecommendation: "எனது பரிந்துரையை பார்க்க",
+      questions: [
+        {
+          id: 1,
+          question: "இந்த பணம் உங்களுக்கு எவ்வளவு விரைவில் தேவைப்படும்?",
+          options: [
+            { label: "எந்த நேரத்திலும் — எளிதாக எடுக்க வேண்டும்", targetType: "Savings" },
+            { label: "குறைந்தபட்சம் ஒரு வருடத்திற்குத் தேவையில்லை", targetType: "FD" },
+            { label: "1–5 வருடங்களுக்கு வைத்திருக்க முடியும்", targetType: "FD" },
+            { label: "மாதந்தோறும் ஒரு குறிப்பிட்ட தொகையை சேமிக்க திட்டமிட்டுள்ளேன்", targetType: "RD" },
+          ],
+        },
+        {
+          id: 2,
+          question: "உங்கள் பணத்தை எவ்வாறு வைப்பிலிட திட்டமிட்டுள்ளீர்கள்?",
+          options: [
+            { label: "தற்போதுள்ள ஒரு பெரிய தொகையாக", targetType: "FD" },
+            { label: "மாதாந்தம் சிறிய தொகையாக", targetType: "RD" },
+            { label: "மேலதிக பணம் கிடைக்கும் நேரங்களில்", targetType: "Savings" },
+            { label: "அவசர தேவைகளுக்கு மட்டும்", targetType: "Savings" },
+          ],
+        },
+        {
+          id: 3,
+          question: "உங்களின் முக்கிய சேமிப்பு நோக்கம் என்ன?",
+          options: [
+            { label: "வைப்பிலிட்ட பணத்திற்கு அதிகபட்ச உத்தரவாத வருமானம்", targetType: "FD" },
+            { label: "ஒழுங்கான மாதாந்த சேமிப்பு பழக்கத்தை உருவாக்குதல்", targetType: "RD" },
+            { label: "அன்றாட செலவுகள் மற்றும் கட்டணங்கள்", targetType: "Savings" },
+            { label: "திடீர் செலவுகளுக்கான குறுகிய கால சேமிப்பு", targetType: "Savings" },
+          ],
+        },
+        {
+          id: 4,
+          question: "முதிர்வடையும் முன் பணத்தை எடுக்காமல் இருக்க உங்களால் முடியுமா?",
+          options: [
+            { label: "ஆம், முதிர்வடையும் வரை பணத்தை எடுக்க மாட்டேன்", targetType: "FD" },
+            { label: "ஆம், மாதாந்தம் பணம் செலுத்த முடியும் வரை", targetType: "RD" },
+            { label: "இல்லை, எந்த நேரத்திலும் பணத்தை எடுக்கும் சுதந்திரம் வேண்டும்", targetType: "Savings" },
+            { label: "உறுதியாக கூறமுடியாது, அபராதங்கள் இல்லாததை விரும்புகிறேன்", targetType: "Savings" },
+          ],
+        },
+      ],
     },
     browse: {
       title: "அனைத்து வங்கிகள் (A–Z)",

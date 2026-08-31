@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { QUIZ_QUESTIONS } from "@/data/quizQuestions";
 import { AccountType } from "@/types";
 import { ArrowLeft, ArrowRight, RotateCcw } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -19,8 +18,8 @@ export default function QuizPage() {
   const [isCalculating, setIsCalculating] = useState(false);
   const [result, setResult] = useState<AccountType | null>(null);
 
-  const totalSteps = QUIZ_QUESTIONS.length;
-  const currentQuestion = QUIZ_QUESTIONS[currentStep];
+  const totalSteps = t.questions.length;
+  const currentQuestion = t.questions[currentStep];
 
   const handleNext = () => {
     if (!selectedOption) return;
