@@ -1,14 +1,15 @@
 import { NextResponse } from 'next/server';
-import { register, collectDefaultMetrics } from 'prom-client';
+import client from 'prom-client';
 
-collectDefaultMetrics();
+// Register එක නැවත නැවත initialize වීම වැළැක්වීම
+const collectDefaultMetrics = client.collectDefaultMetrics;
+collectDefaultMetrics({ register: client.register });
 
 export async function GET() {
-  const metrics = await register.metrics();
+  const metrics = await client.register.metrics();
   return new NextResponse(metrics, {
-    status: 200,
     headers: {
-      'Content-Type': register.contentType,
+      'Content-Type': client.register.contentType,
     },
   });
 }
