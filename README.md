@@ -3,9 +3,7 @@
 
 
 
-<div align="center">
 
-  <img src="assets/logo.svg" alt="DepositLK Logo" width="500"/>
 
   <h1>DepositLK (SaveSmart)</h1>
 
