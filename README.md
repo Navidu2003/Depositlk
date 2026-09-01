@@ -3,6 +3,10 @@
 
 
 
+ Markdown<div align="center">
+
+  <img src="assets/logo.svg" alt="DepositLK Logo" width="500"/>
+
   <h1>DepositLK (SaveSmart)</h1>
 
   <p>
@@ -77,3 +81,84 @@
                        │   Prometheus & Grafana Workspace    │
                        │   Monitoring Pods & Metric Curves   │
                        └─────────────────────────────────────┘
+🛠️ Technology StackDomainTechnologies UsedPurposeFrontendNext.js 15, React 19, TypeScript, Tailwind CSS, Lucide IconsResponsive UI rendering, client state management, and type safetyData LayerPrisma 7 ORM, PostgreSQL / SQLiteDatabase schema migrations, model definitions, and queriesContainerizationDocker, Multi-Stage BuildsMinimal footprint production image generationOrchestrationKubernetes (Kind / Docker Desktop)High availability, self-healing workloads, and rolling updatesScalingKubernetes HPA v2, Metrics ServerDynamic CPU/Memory load-based autoscalingCI/CD AutomationGitHub Actions, GHCR (ghcr.io)Build automation, linting, testing, and container deliveryMonitoringPrometheus, GrafanaCluster metric ingestion, system health tracking, and dashboards🚀 DevOps & CI/CD Deep-Dive1. Multi-Stage Dockerfile OptimizationThe multi-stage Dockerfile separates dependencies, compilation, and runtime environments to maximize layer caching and minimize the final attack surface:Stage 1 (Deps): Installs frozen dependencies with npm ci.Stage 2 (Builder): Compiles TypeScript, runs Prisma generation, and builds Next.js standalone outputs.Stage 3 (Runner): Lightweight Node.js Alpine base containing only standalone runtime output and static assets.2. GitHub Actions Pipeline Flow (.github/workflows/deploy.yml)Plaintext  [ Git Push to main ]
+         │
+         ├──► Job 1: Quality Gate & Tests (npm test, Prisma validate, Build verify)
+         │           │
+         │           ▼ (On Success)
+         └──► Job 2: Build & Push Container Image
+                     ├── Set up Docker Buildx with GitHub Cache Action
+                     ├── Authenticate with GHCR via GITHUB_TOKEN
+                     └── Tag & Push: ghcr.io/navidu2003/depositlk:latest & :<sha>
+3. Kubernetes HPA Load Simulation & Scaling ValidationThe cluster autoscaler maintains a baseline of 2 pods and automatically scales out up to 6 pods when CPU utilization crosses threshold targets:PowerShell# Continuous multi-threaded HTTP traffic generator
+1..15 | ForEach-Object {
+    Start-Job -ScriptBlock {
+        $client = New-Object System.Net.WebClient
+        1..80 | ForEach-Object {
+            try {
+                $null = $client.DownloadString("http://localhost:3000/")
+                $null = $client.DownloadString("http://localhost:3000/browse")
+            } catch {}
+        }
+        $client.Dispose()
+    }
+}
+Plaintext# Live HPA Autoscaling Output
+NAME            REFERENCE                         TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+depositlk-hpa   Deployment/depositlk-deployment   cpu: 12%/40%    2         6         2          24h
+depositlk-hpa   Deployment/depositlk-deployment   cpu: 66%/40%    2         6         3          24h
+depositlk-hpa   Deployment/depositlk-deployment   cpu: 78%/40%    2         6         4          24h  <-- Auto-Scaled
+depositlk-hpa   Deployment/depositlk-deployment   cpu: 8%/40%     2         6         2          24h  <-- Cooled Down
+🎨 Visual Identity & Brand SystemTokenHex ValueApplicationInk Navy#0D2B3EPrimary structural background, typography, and authority surfacesBrass Gold#C89B3CAccent elements, growth progress indicators, and key metric calloutsSage Green#4C7C6FInformational confirmation badges and neutral status indicatorsOff-White#F2F4F1Clean UI background canvas providing high readability contrast📁 Repository StructurePlaintextdepositlk/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # GitHub Actions CI/CD to GHCR
+├── assets/
+│   ├── logo.svg                # Vector brand assets
+│   └── logo-sheet.svg          # Complete design identity sheet
+├── k8s/
+│   ├── deployment.yaml         # Kubernetes App Deployment definition
+│   ├── service.yaml            # ClusterIP / NodePort routing rules
+│   ├── hpa.yaml                # Horizontal Pod Autoscaler manifest
+│   ├── secret.yaml             # Encrypted secret configurations
+│   └── monitoring.yaml         # Prometheus & Grafana service manifests
+├── prisma/
+│   ├── schema.prisma           # Relational schema definition
+│   └── prisma.config.ts        # Prisma ORM environment loader
+├── src/
+│   ├── app/
+│   │   ├── api/                # Core API routes
+│   │   ├── metrics/            # Prometheus scrape collector endpoint
+│   │   ├── browse/             # Alphabetical bank directory
+│   │   ├── calculator/         # Interactive maturity calculator
+│   │   ├── quiz/               # Decision-tree recommendation engine
+│   │   └── page.tsx            # Application landing page
+│   ├── components/             # Reusable UI component systems
+│   └── context/                # Trilingual LanguageProvider state
+├── Dockerfile                  # Multi-stage production container build
+├── package.json                # Project dependencies and script definitions
+└── README.md
+⚡ Quick Start & Local Deployment1. PrerequisitesNode.js: v20.x (LTS)Docker & Kubernetes CLI: docker, kubectl2. Local Application RunBash# Clone the repository
+git clone [https://github.com/Navidu2003/Depositlk.git](https://github.com/Navidu2003/Depositlk.git)
+cd Depositlk
+
+# Install dependencies
+npm ci
+
+# Generate Prisma client
+npx prisma generate
+
+# Run development server
+npm run dev
+Open http://localhost:3000 in your browser.3. Deploy to Kubernetes ClusterBash# Apply declarative manifests
+kubectl apply -f k8s/
+
+# Verify running pods
+kubectl get pods -l app=depositlk
+
+# Port-forward application service
+kubectl port-forward svc/depositlk-service 3000:80
+
+# Port-forward Grafana monitoring dashboard
+kubectl port-forward svc/grafana-service 3002:3000 -n monitoring
+📄 LicenseDistributed under the MIT License. See LICENSE for more information.
