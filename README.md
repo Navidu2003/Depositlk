@@ -1,7 +1,7 @@
 <img width="1844" height="647" alt="Screenshot 2026-08-16 094049" src="https://github.com/user-attachments/assets/d02b8b28-4b49-40f5-b503-f183b07222ca" />
 <div align="center">
 
-  <img src="assets/logo.svg" alt="DepositLK Logo" width="500"/>
+
 
   <h1>DepositLK (SaveSmart)</h1>
 
