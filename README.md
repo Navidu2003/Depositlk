@@ -1,71 +1,78 @@
-# 🏦 DepositLK (SaveSmart)
+<div align="center">
 
-> **Empowering depositors in Sri Lanka with neutral, transparent, and unranked financial insights.**  
-> An ethical deposit advisory platform built with **Next.js**, **TypeScript**, and **Prisma ORM**, orchestrated on **Kubernetes (HPA)** with automated **GitHub Actions CI/CD** and full **Prometheus & Grafana Observability**.
+  <img src="assets/logo.svg" alt="DepositLK Logo" width="500"/>
 
-[![CI/CD Pipeline](https://github.com/Navidu2003/Depositlk/actions/workflows/deploy.yml/badge.svg)](https://github.com/Navidu2003/Depositlk/actions)
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestrated-326CE5?logo=kubernetes&logoColor=white)](https://kubernetes.io/)
-[![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
-[![Prometheus](https://img.shields.io/badge/Prometheus-Monitoring-E6522C?logo=prometheus&logoColor=white)](https://prometheus.io/)
-[![Grafana](https://img.shields.io/badge/Grafana-Observability-F46800?logo=grafana&logoColor=white)](https://grafana.com/)
+  <h1>DepositLK (SaveSmart)</h1>
 
----
+  <p>
+    <strong>A high-performance, ethical deposit advisory platform for Sri Lanka built with Next.js, TypeScript, and Prisma ORM, engineered with an enterprise-grade Kubernetes orchestration, HPA autoscaling, and end-to-end Prometheus/Grafana observability stack.</strong>
+  </p>
 
-## 📌 Table of Contents
-- [Project Overview](#-project-overview)
-- [Ethical Architecture & Interaction Design](#-ethical-architecture--interaction-design)
-- [Core Features & User Workflow](#-core-features--user-workflow)
-- [System Architecture & Tech Stack](#-system-architecture--tech-stack)
-- [Cloud-Native DevOps & Kubernetes Infrastructure](#-cloud-native-devops--kubernetes-infrastructure)
-  - [CI/CD Pipeline (GHCR)](#1-cicd-pipeline-ghcr)
-  - [Container Orchestration & Elastic Autoscaling (HPA)](#2-container-orchestration--elastic-autoscaling-hpa)
-  - [Full-Stack Observability Stack](#3-full-stack-observability-stack)
-- [Project Directory Structure](#-project-directory-structure)
-- [Getting Started Locally](#-getting-started-locally)
-- [Human-Computer Interaction (HCI) Principles](#-human-computer-interaction-hci-principles)
+  <p>
+    <a href="https://github.com/Navidu2003/Depositlk/actions/workflows/deploy.yml"><img src="https://github.com/Navidu2003/Depositlk/actions/workflows/deploy.yml/badge.svg" alt="CI/CD Pipeline"/></a>
+    <img src="https://img.shields.io/badge/Next.js-15-black?logo=next.js" alt="Next.js"/>
+    <img src="https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript" alt="TypeScript"/>
+    <img src="https://img.shields.io/badge/Prisma-7-2D3748?logo=prisma" alt="Prisma"/>
+    <img src="https://img.shields.io/badge/Docker-Multi--Stage-2496ED?logo=docker&logoColor=white" alt="Docker"/>
+    <img src="https://img.shields.io/badge/Kubernetes-HPA%20Orchestrated-326CE5?logo=kubernetes&logoColor=white" alt="Kubernetes"/>
+    <img src="https://img.shields.io/badge/GHCR-Container%20Registry-2088FF?logo=github" alt="GHCR"/>
+    <img src="https://img.shields.io/badge/Prometheus-Metrics%20Scraping-E6522C?logo=prometheus&logoColor=white" alt="Prometheus"/>
+    <img src="https://img.shields.io/badge/Grafana-Live%20Observability-F46800?logo=grafana&logoColor=white" alt="Grafana"/>
+  </p>
+</div>
 
 ---
 
-## 📖 Project Overview
+## 📌 Executive Summary
 
-A significant percentage of retail savers in Sri Lanka struggle to navigate fragmented deposit terms, complex penalty clauses, and statutory deposit insurance limits across commercial and licensed specialized banks. 
-
-**DepositLK** is an advisory web platform designed to eliminate financial decision paralysis **without ranking, recommending, or endorsing any specific financial institution**.
-
----
-
-## ⚖️ Ethical Architecture & Interaction Design
-
-Most financial comparison aggregators prioritize affiliate-driven "Best Rate" badges, creating algorithmic bias that misleads depositors. DepositLK enforces a strict ethical interaction model:
-
-| Design Problem | DepositLK Architectural Resolution |
-| :--- | :--- |
-| **Ignoring Non-Rate Factors** (Trust, Branch Access, Solvency) | The guided quiz recommends **only an account type** (*Fixed*, *Recurring*, or *Savings*), never a bank. |
-| **Misleading "Best Rate" Framing** | The browse directory presents all licensed institutions **alphabetically with equal visual weight**. |
-| **Opaque Fee Structures** | Standardized per-bank detail cards unpack withholding taxes, early withdrawal penalties, and insurance thresholds in plain language. |
+**DepositLK** solves retail financial decision paralysis and asymmetric rate visibility in Sri Lanka. By strictly rejecting algorithmic ranking, affiliate-driven bias, and sponsored product placements, it delivers an objective advisory model:
+1. **Guided Account Matching:** A 3-step decision tree that identifies optimal account categories (*Fixed Deposit*, *Recurring Deposit*, or *High-Yield Savings*) without recommending specific commercial banks.
+2. **Neutral Browse Directory:** Central Bank–registered institutions listed alphabetically with equal visual weighting, complete with transparent penalty rules, withholding tax (WHT) calculations, and deposit insurance guidelines.
 
 ---
 
-## 🔄 Core Features & User Workflow
+## 🎯 Dual-Engineering Highlights
+
+### 💻 Software Engineering Highlights
+* **Full-Stack Next.js (App Router):** Server and Client Component separation for fast SSR, minimal bundle overhead, and client-side privacy-first calculations.
+* **Prisma 7 ORM Data Modeling:** Decoupled schema configurations (`prisma.config.ts`) ensuring smooth static site builds while maintaining type-safe relational schemas.
+* **Trilingual Localization (i18n):** Client-side reactive language context switching dynamically across **English**, **සිංහල (Sinhala)**, and **தமிழ் (Tamil)** with resilient local storage error boundaries.
+* **HCI & Interaction Architecture:** Built on Norman's Mental Models, Hick’s Law, and WCAG 2.1 AA accessibility guidelines to transform complex banking terms into structured, accessible UI components.
+
+### ⚙️ DevOps & Cloud-Native Highlights
+* **Automated CI/CD Pipeline:** GitHub Actions automation running quality tests, Prisma schema validations, multi-platform Docker Buildx caching, and pushing artifacts to GitHub Container Registry (`ghcr.io`).
+* **Declarative Kubernetes Architecture:** Infrastructure-as-Code manifests managing Deployments, Services (NodePort/ClusterIP), ConfigMaps, and encrypted Secrets under standard namespaces.
+* **Dynamic Horizontal Pod Autoscaling (HPA):** Metrics-Server integration configured to scale pods from **2 to 6+ replicas** under real-time concurrent CPU spikes, returning to baseline post-cooldown.
+* **Full-Stack Observability:** Native Prometheus scraping endpoint (`/metrics`) combined with custom Grafana dashboards tracking real-time latency, process memory, and active replica spikes.
+
+---
+
+## 🏗️ System Architecture & Workflow
 
 ```text
- ┌─────────────────────────────────────────────────────────────┐
- │                      1. Landing Page                        │
- │        "You have money to deposit. You decide where."       │
- └──────────────┬──────────────────────────────┬───────────────┘
-                │                              │
-                ▼ [ Guided Path ]              ▼ [ Direct Browse ]
- ┌─────────────────────────────┐ ┌─────────────────────────────┐
- │    2. Guided Needs Quiz     │ │     3. Browse Accounts      │
- │  3 questions on liquidity & │ │  Neutral alphabetical list  │
- │  tenure goals               │ │  Equal visual weighting     │
- └──────────────┬──────────────┘ └─────────────┬───────────────┘
-                │                              │
-                ▼                              ▼
- ┌─────────────────────────────┐ ┌─────────────────────────────┐
- │     4. Account Result       │ │    5. Bank Detail View      │
- │  Identifies account type    ├─►  Rates, penal clauses, docs │
- │  without specific bank name │ │  Maturity growth calculator │
- └─────────────────────────────┘ └─────────────────────────────┘
+                                  [ CLIENT TRAFFIC ]
+                                          │
+                                          ▼
+                       ┌─────────────────────────────────────┐
+                       │   Kubernetes Service / NodePort     │
+                       │     (Port 80 -> Internal 3000)      │
+                       └──────────────────┬──────────────────┘
+                                          │
+                  ┌───────────────────────┴───────────────────────┐
+                  ▼                                               ▼
+     ┌────────────────────────┐                      ┌────────────────────────┐
+     │   DepositLK Pod #1     │                      │   DepositLK Pod #N     │
+     │  ┌──────────────────┐  │    Auto-Scales       │  ┌──────────────────┐  │
+     │  │ Next.js Engine   │  │ ◄──────────────────► │  │ Next.js Engine   │  │
+     │  │ Prisma Client    │  │   (2 - 6 Replicas)   │  │ Prisma Client    │  │
+     │  │ Custom Exporter  │  │                      │  │ Custom Exporter  │  │
+     │  └────────┬─────────┘  │                      │  └────────┬─────────┘  │
+     └───────────┼────────────┘                      └───────────┼────────────┘
+                 │                                               │
+                 └───────────────────────┬───────────────────────┘
+                                         │ Scrapes /metrics
+                                         ▼
+                       ┌─────────────────────────────────────┐
+                       │   Prometheus & Grafana Workspace    │
+                       │   Monitoring Pods & Metric Curves   │
+                       └─────────────────────────────────────┘
